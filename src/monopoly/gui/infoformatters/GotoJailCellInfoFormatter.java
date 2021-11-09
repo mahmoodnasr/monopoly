@@ -9,9 +9,9 @@ public class GotoJailCellInfoFormatter implements CellInfoFormatter {
 
     @Override
     public String format(Cell cell) {
-    	return GOTO_JAIL_LABEL;
+        return GOTO_JAIL_LABEL;
     }
-    
+
     @Override
     public String formatToolTip(Cell cell) {
         return GOTO_JAIL_LABEL;

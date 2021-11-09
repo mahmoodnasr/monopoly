@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BoardController {
     public static final int MAX_PLAYER = 8;
-    
+
     private GameBoard gameBoard;
     /* Colors of the players on the gameBoard */
     private final List<Color> playerColors = new ArrayList<>(Arrays.asList(
@@ -27,7 +27,7 @@ public class BoardController {
     public BoardController(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
-    
+
     public Player getCurrentPlayer() {
         return getPlayer(playerTurnIndex);
     }
@@ -42,7 +42,7 @@ public class BoardController {
     }
 
     public int getNewPositionIndex(int positionIndex, int diceValue) {
-        return (positionIndex + diceValue) % gameBoard.getCellSize();    
+        return (positionIndex + diceValue) % gameBoard.getCellSize();
     }
 
     public int getNumberOfPlayers() {
@@ -52,23 +52,23 @@ public class BoardController {
     public int getOutOfGamePlayersNumber() {
         return outOfGamePlayers;
     }
-    
+
     public Player getPlayer(int index) {
         return players.get(index);
     }
-    
+
     public int getPlayerIndex(Player player) {
         return players.indexOf(player);
     }
-    
+
     public List<Player> getPlayers() {
         return players;
     }
-    
+
     public int getTurn() {
         return playerTurnIndex;
     }
-	
+
     public void movePlayer(Player player, int diceValue) {
         int positionIndex = getCurrentPositionIndex(player);
         int newIndex = getNewPositionIndex(positionIndex, diceValue);
@@ -76,23 +76,23 @@ public class BoardController {
             player.setMoney(player.getMoney() + 200);
         player.setPosition(gameBoard.getCell(newIndex));
     }
-    
+
     public void removePlayer() {
         outOfGamePlayers++;
     }
-    
-    public void reset() {    
+
+    public void reset() {
         for (int i = 0; i < getNumberOfPlayers(); i++) {
             Player player = players.get(i);
             player.setPosition(gameBoard.getCell(0));
         }
         playerTurnIndex = 0;
     }
-    
+
     public void setGameBoard(GameBoard board) {
         this.gameBoard = board;
     }
-    
+
     public void setNumberOfPlayers(int number) {
         players.clear();
         for (int i = 0; i < number; i++) {
@@ -101,7 +101,7 @@ public class BoardController {
             players.add(player);
         }
     }
-    
+
     public void switchTurn() {
         playerTurnIndex = (playerTurnIndex + 1) % getNumberOfPlayers();
     }

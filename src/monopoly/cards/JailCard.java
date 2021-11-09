@@ -7,7 +7,7 @@ import monopoly.enums.CardType;
 
 public class JailCard extends Card {
     private final CardType type;
-    
+
     public JailCard(CardType cardType) {
         type = cardType;
     }

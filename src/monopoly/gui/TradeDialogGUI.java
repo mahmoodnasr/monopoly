@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+
 import monopoly.Cell;
 import monopoly.MainController;
 import monopoly.Player;
@@ -34,7 +35,7 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
     private JComboBox<Player> sellersCombobox;
     private TradeDeal deal;
     private JTextField amountText;
-    
+
     public TradeDialogGUI(MainController mainController, Frame parent) {
         super(parent);
         int xOffset = 125;
@@ -47,12 +48,12 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         amountText = new JTextField();
         okButton = new JButton("OK");
         cancelButton = new JButton("Cancel");
-        
+
         okButton.setEnabled(false);
-        
+
         buildSellersComboBox(mainController);
         super.setModalityType(JDialog.DEFAULT_MODALITY_TYPE);
-             
+
         Container contentPane = super.getContentPane();
         contentPane.setLayout(new GridLayout(4, 2));
         contentPane.add(new JLabel("Property owner"));
@@ -67,19 +68,20 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         cancelButton.addActionListener((ActionEvent e) -> {
             TradeDialogGUI.this.setVisible(false);
         });
-        
+
         sellersCombobox.addItemListener((ItemEvent e) -> {
-            Player player = (Player)e.getItem();
+            Player player = (Player) e.getItem();
             updatePropertiesComboBox(player);
         });
-        
+
         sellersCombobox.setRenderer(new DefaultListCellRenderer() {
             private static final long serialVersionUID = -5460014450312978883L;
+
             @Override
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component ret = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (isSelected || cellHasFocus) {
-                    Player p = (Player)value;
+                    Player p = (Player) value;
                     list.setSelectionBackground(p.getPlayerColor());
                     list.setSelectionForeground(Color.black);
                 }
@@ -94,18 +96,21 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
                 sellersCombobox.setBorder(new LineBorder(defaultColor, comboboxBorderSize));
                 sellersCombobox.setBackground(defaultColor);
             }
+
             @Override
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                Player player = (Player)sellersCombobox.getSelectedItem();
+                Player player = (Player) sellersCombobox.getSelectedItem();
                 sellersCombobox.setBorder(new LineBorder(player.getPlayerColor(), comboboxBorderSize));
                 sellersCombobox.setBackground(player.getPlayerColor());
             }
+
             @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {}
+            public void popupMenuCanceled(PopupMenuEvent e) {
+            }
         };
 
         sellersCombobox.addPopupMenuListener(listener);
-        
+
         okButton.addActionListener((ActionEvent e) -> {
             int amount;
             try {
@@ -123,9 +128,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
                 return;
             }
             Cell cell = (Cell) propertiesCombobox.getSelectedItem();
-            if(cell == null) return;
+            if (cell == null) return;
             Player currentPlayer = mainController.getCurrentPlayer();
-            if(currentPlayer.getMoney() > amount) {
+            if (currentPlayer.getMoney() > amount) {
                 deal = new TradeDeal(cell, currentPlayer, amount);
             } else {
                 JOptionPane.showMessageDialog(TradeDialogGUI.this,
@@ -135,7 +140,7 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
             }
             TradeDialogGUI.this.setVisible(false);
         });
-        
+
         super.pack();
     }
 
@@ -144,7 +149,7 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         sellers.stream().forEach((player) -> {
             sellersCombobox.addItem(player);
         });
-        if(sellers.size() > 0) {
+        if (sellers.size() > 0) {
             Player topSeller = sellers.get(0);
             updatePropertiesComboBox(topSeller);
             sellersCombobox.setBackground(topSeller.getPlayerColor());

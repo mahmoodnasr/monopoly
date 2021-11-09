@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+
 import monopoly.GameBoard;
 import monopoly.MainController;
 import monopoly.Player;
@@ -21,11 +22,11 @@ public class BuyHouseDialog extends JDialog {
     private final MainController mainController;
     private JComboBox<ColorGroup> monopolyCombobox;
     private final Player player;
-    
+
     public BuyHouseDialog(MainController mainController, Player player, PlayerPanel panel) {
         this.mainController = mainController;
         this.player = player;
-        
+
         Container container = super.getContentPane();
         housesCombobox = new JComboBox<>();
         container.setLayout(new GridLayout(3, 2));
@@ -38,11 +39,11 @@ public class BuyHouseDialog extends JDialog {
         container.doLayout();
         super.pack();
         super.setLocationRelativeTo(panel);
-        
+
         updateHousesComboBox(monopolyCombobox.getItemAt(0));
-        
+
         monopolyCombobox.addActionListener((ActionEvent e) -> {
-            ColorGroup monopoly = (ColorGroup)monopolyCombobox.getSelectedItem();
+            ColorGroup monopoly = (ColorGroup) monopolyCombobox.getSelectedItem();
             updateHousesComboBox(monopoly);
         });
     }
@@ -77,12 +78,12 @@ public class BuyHouseDialog extends JDialog {
     }
 
     private void okClicked() {
-        ColorGroup monopoly = (ColorGroup)monopolyCombobox.getSelectedItem();
+        ColorGroup monopoly = (ColorGroup) monopolyCombobox.getSelectedItem();
         int number = housesCombobox.getSelectedIndex() + 1;
         mainController.purchaseHouse(monopoly, number);
         this.dispose();
     }
-    
+
     private void updateHousesComboBox(ColorGroup monopoly) {
         housesCombobox.removeAllItems();
         GameBoard gameBoard = mainController.getGameBoard();

@@ -7,7 +7,7 @@ import monopoly.Player;
 import monopoly.enums.CardType;
 
 public class MovePlayerCard extends Card {
-    
+
     private final String destination;
     private final CardType type;
 
@@ -24,8 +24,8 @@ public class MovePlayerCard extends Card {
         int currentCell = mainController.getGameBoard().queryCellIndex(currentPosition.getName());
         int diceValue = 0;
         if (currentCell > newCell) {
-            diceValue = (mainController.getGameBoard().getCellSize() + 
-                         (newCell - currentCell));
+            diceValue = (mainController.getGameBoard().getCellSize() +
+                    (newCell - currentCell));
         } else if (currentCell <= newCell) {
             diceValue = newCell - currentCell;
         }

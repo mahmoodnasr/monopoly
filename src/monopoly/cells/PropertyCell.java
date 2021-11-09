@@ -12,7 +12,7 @@ public class PropertyCell extends Cell {
     private int originalRent = 0;
     private int rent;
     private int sellPrice;
-    
+
     public ColorGroup getColorGroup() {
         return colorGroup;
     }
@@ -24,11 +24,11 @@ public class PropertyCell extends Cell {
     public int getNumHouses() {
         return numHouses;
     }
-    
+
     public int getRent() {
         return rent;
     }
-    
+
     public int originalRent() {
         return originalRent;
     }
@@ -54,7 +54,7 @@ public class PropertyCell extends Cell {
             originalRent = rent;
         this.rent = rent;
     }
-    
+
     @Override
     public int getPrice() {
         return sellPrice;

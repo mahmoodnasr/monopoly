@@ -1,6 +1,7 @@
 package monopoly;
 
 import java.util.List;
+
 import monopoly.cells.CardCell;
 import monopoly.cells.JailCell;
 import monopoly.enums.CardType;
@@ -17,7 +18,7 @@ public class MainController {
     private MonopolyGUI gui;
     private final PropertyController propertyController;
     private int utilityDiceRoll;
-    
+
     public MainController() {
         gameBoard = new GameBoardDefault();
         boardController = new BoardController(gameBoard);
@@ -31,7 +32,7 @@ public class MainController {
 
     public Card buttonDrawCardClicked() {
         gui.setDrawCardEnabled(false);
-        CardCell cell = (CardCell)getCurrentPlayer().getPosition();
+        CardCell cell = (CardCell) getCurrentPlayer().getPosition();
         Card card;
         if (cell.getType() == CardType.CC) {
             card = getGameBoard().drawCCCard();
@@ -47,7 +48,7 @@ public class MainController {
     public void buttonEndTurnClicked() {
         setAllButtonEnabled(false);
         getCurrentPlayer().getPosition().playAction(this);
-        
+
         if (getCurrentPlayer().isBankrupt()) {
             getCurrentPlayer().setOutOfGame();
             boardController.removePlayer();
@@ -79,7 +80,7 @@ public class MainController {
         gui.setPurchasePropertyEnabled(false);
         gui.update();
     }
-    
+
     public void buttonRollDiceClicked(PlayerPanel panel) {
         dice.roll();
         if ((dice.getTotal()) > 0) {
@@ -107,7 +108,7 @@ public class MainController {
             }
         }
     }
-    
+
     public boolean canBuyHouse() {
         return propertyController.canBuyHouse();
     }
@@ -124,7 +125,7 @@ public class MainController {
     public Card drawChanceCard() {
         return gameBoard.drawChanceCard();
     }
-    
+
     private void finishPlayerMove(Player player) {
         Cell cell = player.getPosition();
         int playerIndex = getPlayerIndex(player);
@@ -144,7 +145,7 @@ public class MainController {
     public Player getCurrentPlayer() {
         return boardController.getCurrentPlayer();
     }
-    
+
     public Dice getDice() {
         return dice;
     }
@@ -152,11 +153,11 @@ public class MainController {
     public MonopolyGUI getGUI() {
         return gui;
     }
-    
+
     public GameBoard getGameBoard() {
         return gameBoard;
     }
-    
+
     public List<ColorGroup> getMonopolies(Player player) {
         return propertyController.getMonopolies(player);
     }
@@ -164,7 +165,7 @@ public class MainController {
     public int getNumberOfPlayers() {
         return boardController.getNumberOfPlayers();
     }
-    
+
     private void getOutOfJail() {
         Player currentPlayer = boardController.getCurrentPlayer();
         currentPlayer.subtractMoney(JailCell.BAIL);
@@ -187,7 +188,7 @@ public class MainController {
     public List<Player> getSellerList() {
         return propertyController.getSellerList();
     }
-    
+
     public int getTurn() {
         return boardController.getTurn();
     }
@@ -195,7 +196,7 @@ public class MainController {
     public int getUtilityDiceRoll() {
         return this.utilityDiceRoll;
     }
-    
+
     public void giveAllProperties(Player fromPlayer, Player toPlayer) {
         propertyController.giveAllProperties(fromPlayer, toPlayer);
     }
@@ -203,22 +204,22 @@ public class MainController {
     public void movePlayer(Player player, int diceValue) {
         int positionIndex = boardController.getCurrentPositionIndex(player);
         int newIndex = boardController.getNewPositionIndex(positionIndex, diceValue);
-        
+
         boardController.movePlayer(player, diceValue);
         gui.movePlayer(getPlayerIndex(player), positionIndex, newIndex);
         finishPlayerMove(player);
 
         gui.update();
     }
-    
+
     public void payRentTo(Player owner, int rent) {
         propertyController.payRentTo(owner, rent);
     }
-    
+
     public void purchase() {
         propertyController.purchase();
     }
-    
+
     public void purchaseHouse(ColorGroup selectedMonopoly, int houses) {
         if (propertyController.purchaseHouse(selectedMonopoly, houses) <= 5)
             gui.update();
@@ -229,7 +230,7 @@ public class MainController {
         if (gameBoard != null)
             gameBoard.removeCards();
     }
-	
+
     public void sendToJail(Player player) {
         String currentPlayerName = getCurrentPlayer().getPosition().getName();
         int oldPosition = gameBoard.queryCellIndex(currentPlayerName);
@@ -238,7 +239,7 @@ public class MainController {
         int jailIndex = gameBoard.queryCellIndex("Jail");
         gui.movePlayer(getPlayerIndex(player), oldPosition, jailIndex);
     }
-    
+
     private void setAllButtonEnabled(boolean enabled) {
         gui.setRollDiceEnabled(enabled);
         gui.setPurchasePropertyEnabled(enabled);
@@ -248,7 +249,7 @@ public class MainController {
         gui.setDrawCardEnabled(enabled);
         gui.setGetOutOfJailEnabled(enabled);
     }
-    
+
     public void setGUI(MonopolyGUI gui) {
         this.gui = gui;
     }
@@ -270,7 +271,7 @@ public class MainController {
 
     public void switchTurn() {
         boardController.switchTurn();
-        
+
         if (getCurrentPlayer().isOutOfGame()) {
             switchTurn();
             return;
@@ -291,5 +292,5 @@ public class MainController {
     public void utilityRollDice() {
         this.utilityDiceRoll = gui.showUtilityDiceRoll();
     }
-    
+
 }

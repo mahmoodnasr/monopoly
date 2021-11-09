@@ -1,18 +1,19 @@
 package monopoly.gui;
 
 import javax.swing.JOptionPane;
+
 import monopoly.*;
 
 public class Main {
 
     private static final MainController MAIN_CONTROLLER = new MainController();
-    
+
     private static int inputNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
-        while(numPlayers < 2 || numPlayers > BoardController.MAX_PLAYER) {
+        while (numPlayers < 2 || numPlayers > BoardController.MAX_PLAYER) {
             String numberOfPlayers = JOptionPane.showInputDialog(
-                window, 
-                "How many players"
+                    window,
+                    "How many players"
             );
             if (numberOfPlayers == null) {
                 System.exit(0);
@@ -21,15 +22,15 @@ public class Main {
                 numPlayers = Integer.parseInt(numberOfPlayers);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(
-                    window, 
-                    "Please input a number"
+                        window,
+                        "Please input a number"
                 );
                 continue;
             }
             if (numPlayers < 2 || numPlayers > BoardController.MAX_PLAYER) {
                 JOptionPane.showMessageDialog(
-                    window, 
-                    "Please input a number between 2 and 8"
+                        window,
+                        "Please input a number between 2 and 8"
                 );
             } else {
                 MAIN_CONTROLLER.setNumberOfPlayers(numPlayers);
@@ -46,30 +47,30 @@ public class Main {
                 MAIN_CONTROLLER.setGameBoard(board);
             } catch (ClassNotFoundException e) {
                 JOptionPane.showMessageDialog(
-                    window, 
-                    "Class Not Found.  Program will exit"
+                        window,
+                        "Class Not Found.  Program will exit"
                 );
                 System.exit(0);
-            } catch (IllegalAccessException e ) {
+            } catch (IllegalAccessException e) {
                 JOptionPane.showMessageDialog(
-                    window, 
-                    "Illegal Access of Class.  Program will exit"
+                        window,
+                        "Illegal Access of Class.  Program will exit"
                 );
                 System.exit(0);
             } catch (InstantiationException e) {
                 JOptionPane.showMessageDialog(
-                    window, 
-                    "Class Cannot be Instantiated.  Program will exit"
+                        window,
+                        "Class Cannot be Instantiated.  Program will exit"
                 );
                 System.exit(0);
             }
         }
-        
+
         int numPlayers = inputNumberOfPlayers(window);
         for (int i = 0; i < numPlayers; i++) {
             String name = JOptionPane.showInputDialog(
-                window, 
-                "Please input name for Player " + (i + 1)
+                    window,
+                    "Please input name for Player " + (i + 1)
             );
             if (name.equals("") || name.trim().isEmpty()) {
                 MAIN_CONTROLLER.getPlayer(i).setName("Player " + (i + 1));

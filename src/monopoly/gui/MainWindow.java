@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
 import monopoly.Cell;
 import monopoly.GameBoard;
 import monopoly.MainController;
@@ -34,7 +35,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
     public MainWindow(MainController mainCtl) {
         this.mainController = mainCtl;
-        
+
         northPanel.setBorder(new LineBorder(Color.BLACK));
         southPanel.setBorder(new LineBorder(Color.BLACK));
         westPanel.setBorder(new LineBorder(Color.BLACK));
@@ -49,46 +50,46 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         container.add(eastPanel, BorderLayout.EAST);
         container.add(westPanel, BorderLayout.WEST);
 
-        super.addWindowListener(new WindowAdapter(){
+        super.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                    System.exit(0);
+                System.exit(0);
             }
         });
     }
 
     private void addCells(JPanel panel, List<Cell> cells) {
         cells.stream().map((cell) -> new CellGUI(cell)).map((guiCell) -> {
-                                        panel.add(guiCell);
-                                        return guiCell;
-                                    }).forEach((guiCell) -> {
-                                        guiCells.add(guiCell);
-                                    });
+            panel.add(guiCell);
+            return guiCell;
+        }).forEach((guiCell) -> {
+            guiCells.add(guiCell);
+        });
     }
 
     private void buildPlayerPanels() {
         JPanel infoPanel = new JPanel();
         int players = mainController.getNumberOfPlayers();
-        infoPanel.setLayout(new GridLayout(2, (players+1)/2));
+        infoPanel.setLayout(new GridLayout(2, (players + 1) / 2));
         getContentPane().add(infoPanel, BorderLayout.CENTER);
         playerPanels = new PlayerPanel[mainController.getNumberOfPlayers()];
-        for (int i = 0; i < mainController.getNumberOfPlayers(); i++){
+        for (int i = 0; i < mainController.getNumberOfPlayers(); i++) {
             playerPanels[i] = new PlayerPanel(mainController, mainController.getPlayer(i));
             infoPanel.add(playerPanels[i]);
             playerPanels[i].displayInfo();
         }
     }
-	
+
     private CellGUI queryCell(int index) {
         Cell cell = mainController.getGameBoard().getCell(index);
-            for (Object guiCell1 : guiCells) {
-                CellGUI guiCell = (CellGUI) guiCell1;
-                if (guiCell.getCell() == cell)
-                    return guiCell;
-            }
+        for (Object guiCell1 : guiCells) {
+            CellGUI guiCell = (CellGUI) guiCell1;
+            if (guiCell.getCell() == cell)
+                return guiCell;
+        }
         return null;
     }
-	
+
     public void setupGameBoard(GameBoard board) {
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellSize());
         northPanel.setLayout(new GridLayout(1, dimension.width + 2));
@@ -139,7 +140,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     public boolean isTradeButtonEnabled(int i) {
         return playerPanels[i].isTradeButtonEnabled();
     }
-	
+
     @Override
     public void movePlayer(int index, int from, int to) {
         CellGUI fromCell = queryCell(from);
@@ -169,7 +170,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         CellGUI cell = queryCell(from);
         cell.removePlayer(index);
     }
-    
+
     @Override
     public void setBuyHouseEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
@@ -243,7 +244,7 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         for (PlayerPanel playerPanel : playerPanels) {
             playerPanel.displayInfo();
         }
-        
+
         guiCells.stream().map((guiCell) -> guiCell).forEach((cell) -> {
             cell.displayInfo();
         });

@@ -1,7 +1,7 @@
 package monopoly.enums;
 
 public enum ColorGroup {
-    RAILROAD, 
+    RAILROAD,
     UTILITY,
     PURPLE,
     TEAL,
@@ -10,6 +10,6 @@ public enum ColorGroup {
     RED,
     ORANGE,
     GREEN,
-    BLUE, 
+    BLUE,
     YELLOW
 }

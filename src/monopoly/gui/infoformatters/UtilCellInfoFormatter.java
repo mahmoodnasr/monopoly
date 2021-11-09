@@ -16,15 +16,15 @@ public class UtilCellInfoFormatter implements CellInfoFormatter {
                 .append("</html>");
         return buf.toString();
     }
-    
+
     @Override
     public String formatToolTip(Cell cell) {
-        UtilityCell c = (UtilityCell)cell;
+        UtilityCell c = (UtilityCell) cell;
         StringBuilder buf = new StringBuilder();
         Player owner = cell.getOwner();
         String ownerName = "";
         if (owner != null) {
-                ownerName = owner.getName();
+            ownerName = owner.getName();
         }
         buf.append("<html><b><font color='olive'>")
                 .append(cell.getName())

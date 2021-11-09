@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import monopoly.cells.GoCell;
 import monopoly.cells.PropertyCell;
 import monopoly.enums.CardType;
@@ -33,7 +34,7 @@ public class GameBoard {
     public final void addCell(Cell cell) {
         cells.add(cell);
     }
-	
+
     public void addCell(PropertyCell cell) {
         int propertyNumber = getPropertyNumberForColor(cell.getColorGroup());
         propertyColors.put(cell.getColorGroup(), propertyNumber + 1);
@@ -55,22 +56,22 @@ public class GameBoard {
     public Cell getCell(int index) {
         return cells.get(index);
     }
-	
+
     public int getCellSize() {
         return cells.size();
     }
-	
+
     public List<PropertyCell> getPropertiesInMonopoly(ColorGroup color) {
         List<PropertyCell> monopolyCells = new ArrayList<>();
-        cells.stream().filter((cell) 
-                            -> (cell instanceof PropertyCell)).map((cell)
-                            -> (PropertyCell)cell).filter((pc) 
-                            -> (pc.getColorGroup().equals(color))).forEach((pc) -> {
-                                monopolyCells.add(pc);
-                            });
+        cells.stream().filter((cell)
+                -> (cell instanceof PropertyCell)).map((cell)
+                -> (PropertyCell) cell).filter((pc)
+                -> (pc.getColorGroup().equals(color))).forEach((pc) -> {
+            monopolyCells.add(pc);
+        });
         return monopolyCells;
     }
-	
+
     public int getPropertyNumberForColor(ColorGroup colorGroup) {
         Integer number = propertyColors.get(colorGroup);
         if (number != null)
@@ -85,8 +86,8 @@ public class GameBoard {
         }
         return null;
     }
-	
-    public int queryCellIndex(String string){
+
+    public int queryCellIndex(String string) {
         for (int i = 0; i < cells.size(); i++) {
             if (cells.get(i).getName().equals(string))
                 return i;
@@ -97,7 +98,7 @@ public class GameBoard {
     public void removeCards() {
         communityChestCards.clear();
     }
-    
+
     public final void shuffleCards() {
         Collections.shuffle(communityChestCards);
         Collections.shuffle(chanceCards);

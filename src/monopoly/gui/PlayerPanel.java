@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
+
 import monopoly.Card;
 import monopoly.Cell;
 import monopoly.MainController;
@@ -46,10 +47,10 @@ public class PlayerPanel extends JPanel {
         this.player = player;
         nameLabel = new JLabel();
         moneyLabel = new JLabel();
-        propertyText = new JTextArea(); 
-        JScrollPane scroll = new JScrollPane(propertyText, 
-        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        
+        propertyText = new JTextArea();
+        JScrollPane scroll = new JScrollPane(propertyText,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
         propertyText.setEnabled(false);
         propertyText.setDisabledTextColor(Color.black);
 
@@ -61,7 +62,7 @@ public class PlayerPanel extends JPanel {
         infoPanel.add(propertiesPanel, BorderLayout.CENTER);
 
         propertiesPanel.setLayout(new OverlayLayout(propertiesPanel));
-        namePanel.setBackground(player.getPlayerColor());        
+        namePanel.setBackground(player.getPlayerColor());
 
         namePanel.add(nameLabel);
         namePanel.add(moneyLabel);
@@ -145,11 +146,11 @@ public class PlayerPanel extends JPanel {
     public boolean isEndTurnButtonEnabled() {
         return endTurnButton.isEnabled();
     }
-    
+
     public boolean isGetOutOfJailButtonEnabled() {
         return getOutOfJailButton.isEnabled();
     }
-    
+
     public boolean isTradeButtonEnabled() {
         return tradeButton.isEnabled();
     }

@@ -9,7 +9,7 @@ public class RailRoadCell extends Cell {
     private int baseRent = 0;
     private int price;
     private int rent;
-    
+
     public int getBaseRent() {
         return baseRent;
     }
@@ -33,12 +33,12 @@ public class RailRoadCell extends Cell {
         }
         this.rent = rent;
     }
-    
+
     @Override
     public int getPrice() {
         return price;
     }
-    
+
     @Override
     public void playAction(MainController mainController) {
         Player currentPlayer;

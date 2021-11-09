@@ -5,7 +5,7 @@ import monopoly.MainController;
 import monopoly.Player;
 
 public class GoToJailCell extends Cell {
-	
+
     public GoToJailCell() {
         super.setName("Go to Jail");
     }

@@ -2,6 +2,7 @@ package monopoly.gui;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import monopoly.Cell;
 import monopoly.cells.CardCell;
 import monopoly.cells.FreeParkingCell;
@@ -22,7 +23,7 @@ import monopoly.gui.infoformatters.UtilCellInfoFormatter;
 
 public class InfoFormatter {
     static Map<Object, CellInfoFormatter> cellInfoFormatters;
-    
+
     static {
         cellInfoFormatters = new HashMap<>();
         addFormatters();

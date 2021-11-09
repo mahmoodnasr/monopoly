@@ -13,9 +13,9 @@ public class UtilityCell extends Cell {
 
     public int getRent(int diceRoll) {
         if (player.numberOfUtilities() == 1)
-                return diceRoll * 4;
+            return diceRoll * 4;
         else if (player.numberOfUtilities() >= 2)
-                return diceRoll * 10;
+            return diceRoll * 10;
         return 0;
     }
 
@@ -23,7 +23,7 @@ public class UtilityCell extends Cell {
     public int getPrice() {
         return UtilityCell.PRICE;
     }
-    
+
     @Override
     public void playAction(MainController mainController) {
         Player currentPlayer;

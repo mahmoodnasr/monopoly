@@ -8,7 +8,7 @@ import monopoly.gui.CellInfoFormatter;
 public class PropertyCellInfoFormatter implements CellInfoFormatter {
     @Override
     public String format(Cell cell) {
-        PropertyCell c = (PropertyCell)cell;
+        PropertyCell c = (PropertyCell) cell;
         StringBuilder buf = new StringBuilder();
         buf.append("<html><b><font color='")
                 .append(c.getColorGroup().name())
@@ -18,10 +18,10 @@ public class PropertyCellInfoFormatter implements CellInfoFormatter {
                 .append("</html>");
         return buf.toString();
     }
-    
+
     @Override
     public String formatToolTip(Cell cell) {
-        PropertyCell c = (PropertyCell)cell;
+        PropertyCell c = (PropertyCell) cell;
         StringBuilder buf = new StringBuilder();
         Player owner = cell.getOwner();
         String ownerName = "";

@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import javax.swing.border.BevelBorder;
+
 import monopoly.BoardController;
 import monopoly.Cell;
 import monopoly.MainController;
@@ -16,7 +17,7 @@ public class CellGUI extends JPanel {
     private final Cell cell;
     private JLabel infoLabel;
     private final JLabel[] playersLabel = new JLabel[BoardController.MAX_PLAYER];
-    
+
     public CellGUI(Cell cell) {
         this.cell = cell;
         super.setLayout(new OverlayLayout(this));
@@ -26,12 +27,12 @@ public class CellGUI extends JPanel {
         playerPanel.setOpaque(false);
         createPlayerLabels(playerPanel);
         super.add(playerPanel);
-        super.setPreferredSize(new Dimension(100,100));
+        super.setPreferredSize(new Dimension(100, 100));
         addCellInfo();
         super.setToolTipText(InfoFormatter.cellToolTip(cell));
         super.doLayout();
     }
-	
+
     private void addCellInfo() {
         infoLabel = new JLabel();
         displayInfo();
@@ -40,7 +41,7 @@ public class CellGUI extends JPanel {
         infoPanel.add(infoLabel);
         add(infoPanel);
     }
-	
+
     public void addPlayer(MainController mainController, int index) {
         Player player = mainController.getPlayer(index);
         playersLabel[index].setOpaque(true);
@@ -51,7 +52,7 @@ public class CellGUI extends JPanel {
         for (int i = 0; i < BoardController.MAX_PLAYER; i++) {
             playersLabel[i] = new JLabel();
             playerPanel.add(playersLabel[i]);
-            
+
         }
     }
 
